@@ -508,3 +508,50 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+// Script para manejar la pantalla de introducción
+document.addEventListener('DOMContentLoaded', function() {
+    const introScreen = document.getElementById('intro-screen');
+    const abrirBtn = document.getElementById('abrir-btn');
+    const mainContainer = document.querySelector('.main-container');
+    const audio = document.getElementById('background-audio');
+    const musicWaves = document.getElementById('music-waves');
+    
+    // Asegurarse de que solo la pantalla de intro esté visible al cargar
+    mainContainer.style.display = 'none';
+    
+    // Evento click para el botón abrir
+    abrirBtn.addEventListener('click', function() {
+        // Hacer desvanecer la pantalla de intro
+        introScreen.style.opacity = '0';
+        
+        // Después de la animación de desvanecimiento
+        setTimeout(function() {
+            // Ocultar la pantalla intro
+            introScreen.classList.add('hidden');
+            
+            // Mostrar el contenido principal
+            mainContainer.style.display = 'block';
+            mainContainer.classList.add('fadeIn');
+            
+            // Reproducir música automáticamente
+            audio.play().then(() => {
+                // Mostrar animación de ondas de música
+                musicWaves.style.display = 'flex';
+            }).catch(err => {
+                console.log("No se pudo reproducir audio automáticamente:", err);
+            });
+        }, 1500); // Coincidir con la duración de la transición CSS (1.5s)
+    });
+    
+    // Añadir función para el botón de música existente
+    const playMusicBtn = document.getElementById('play-music');
+    playMusicBtn.addEventListener('click', function() {
+        if (audio.paused) {
+            audio.play();
+            musicWaves.style.display = 'flex';
+        } else {
+            audio.pause();
+            musicWaves.style.display = 'none';
+        }
+    });
+});
