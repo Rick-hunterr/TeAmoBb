@@ -3,7 +3,7 @@ function createHearts() {
     const heartContainer = document.getElementById('heart-container');
     
     // Crear 15 corazones
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 1000; i++) {
         setTimeout(() => {
             const heart = document.createElement('div');
             heart.classList.add('heart');
