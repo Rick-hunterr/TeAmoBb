@@ -20,6 +20,7 @@
         
         <link rel="stylesheet" href="styles.css">
     </head>
+    
 <body>
     <div class="main-container">
         <div class="antique-frame">
@@ -61,30 +62,40 @@
                     <div class="vintage-gallery">
                         <div class="gallery-item stagger-item vintage-overlay">
                             <div class="photo-frame"></div>
-                            <img src="img/img1.jpeg" alt="Primer encuentro">
-                            <div class="photo-caption">Nuestro primer encuentro</div>
+                            <img src="img/img1.jpeg" alt="Recuerdos de una noche donde la luz tenia un color miel">
+                            <div class="photo-caption"></div>
                         </div>
                         <div class="gallery-item stagger-item vintage-overlay">
                             <div class="photo-frame"></div>
-                            <img src="img/img2.jpeg" alt="Viaje a la playa">
-                            <div class="photo-caption">Atardecer en la playa</div>
+                            <img src="img/img2.jpeg" alt="Tus labios eran igual de dulces que la miel">
+                            <div class="photo-caption"></div>
                         </div>
                         <div class="gallery-item stagger-item vintage-overlay">
                             <div class="photo-frame"></div>
-                            <img src="img/img3.jpeg" alt="Viaje a la montaña">
-                            <div class="photo-caption">Nuestra aventura montañera</div>
+                            <img src="img/img3.jpeg" alt="Juntos estabamos igual de pegagoso que la miel">
+                            <div class="photo-caption"></div>
                         </div>
                         <div class="gallery-item stagger-item vintage-overlay">
                             <div class="photo-frame"></div>
-                            <img src="img/img4.jpeg" alt="Picnic en el parque">
-                            <div class="photo-caption">Picnic de primavera</div>
+                            <img src="img/img4.jpeg" alt="Quiro ser la abejita que haga miel con tu polem">
+                            <div class="photo-caption"></div>
                         </div>
                         <div class="gallery-item stagger-item vintage-overlay">
                             <div class="photo-frame"></div>
-                            <img src="img/img6.jpeg" alt="Aniversario especial">
-                            <div class="photo-caption">Nuestro segundo aniversario</div>
+                            <img src="img/img6.jpeg" alt="Mi flor la mas bella del parque">
+                            <div class="photo-caption"></div>
                         </div>
                     </div>
+
+                    <div id="imageModal" class="modal">
+                        <div class="modal-content">
+                          <span class="close-button">&times;</span>
+                          <h2 class="modal-title" id="modalImageTitle">Mis recuerdos</h2>
+                          <div class="modal-body">
+                            <img id="modalImage" src="" alt="Enlarged Image" style="width:100%; border-radius: 5px; box-shadow: var(--shadow-medium);">
+                          </div>
+                        </div>
+                      </div>
                     
                     <div class="quote slide-in-left">
                         <div class="quote-mark quote-left">"</div>
@@ -251,5 +262,51 @@
         </div>
     </div>
     <script src="scripts.js"></script>
+
+
+    <!-- Reemplaza tu etiqueta de audio actual con esta -->
+<audio id="background-audio" loop>
+    <source src="audio/suis-moi.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Añade este HTML para la animación visual -->
+<div class="music-player">
+    <div class="music-button" id="play-music">
+        <span class="music-icon">♫</span>
+    </div>
+    <div class="music-waves" id="music-waves">
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+        <div class="wave wave3"></div>
+        <div class="wave wave4"></div>
+        <div class="wave wave5"></div>
+    </div>
+    <div class="music-title">Suis-moi</div>
+</div>
+
+<!-- Contenedor para la animación de flores -->
+<div id="flowers-container"></div>
+
+<!-- Elemento para El Principito y la Rosa -->
+<div class="principito-container">
+    <div class="principito-scene">
+        <div class="planet"></div>
+        <div class="star star1"></div>
+        <div class="star star2"></div>
+        <div class="star star3"></div>
+        <div class="star star4"></div>
+        <div class="star star5"></div>
+        <div class="principito">
+            <img src="img/principito.png" alt="El Principito">
+        </div>
+        <div class="quote-bubble">
+            <p>"Lo esencial es invisible a los ojos"</p>
+        </div>
+    </div>
+</div>
+
 </body>
+<footer>
+    <br><br><br><br>
+</footer>
 </html>

@@ -233,7 +233,7 @@ h1 {
 
 .gallery-item:hover {
     scale: 1.20;
-    z-index: 10000;
+    z-index: 10;
     background: linear-gradient(to bottom, var(--color-parchment), var(--color-cream));
     box-shadow: var(--shadow-medium);
 }
@@ -835,5 +835,434 @@ h1 {
     
     .modal-content {
         margin: 5% auto;
+    }
+}
+
+/*Diseño reproductor de musica*/
+
+.music-player {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 245, 230, 0.9);
+    border: 1px solid #d4a76a;
+    border-radius: 30px;
+    padding: 2px 8px;
+    box-shadow: 0 2px 10px rgba(139, 69, 19, 0.3);
+    z-index: 1000;
+    transition: all 0.5s ease;
+}
+
+.music-button {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: linear-gradient(to bottom, #f0d9b5, #d4a76a);
+    border: 1px solid #b38b4d;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    outline: none;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(139, 69, 19, 0.4);
+}
+
+.music-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 3px 8px rgba(139, 69, 19, 0.5);
+}
+
+.music-button:active {
+    transform: scale(0.95);
+}
+
+.music-icon {
+    font-size: 20px;
+    color: #8b4513;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.music-button.playing .music-icon {
+    animation: pulse 1.5s infinite;
+}
+
+.music-waves {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    margin-left: 15px;
+    overflow: hidden;
+    width: 0;
+    opacity: 0;
+    transition: width 0.5s ease, opacity 0.5s ease;
+}
+
+.music-waves.active {
+    width: 100px;
+    opacity: 1;
+}
+
+.wave {
+    background: #8b4513;
+    width: 3px;
+    height: 10px;
+    margin: 0 2px;
+    border-radius: 2px;
+    animation: wave 1.2s infinite ease-in-out;
+}
+
+.wave1 { animation-delay: 0.1s; }
+.wave2 { animation-delay: 0.3s; }
+.wave3 { animation-delay: 0.5s; }
+.wave4 { animation-delay: 0.7s; }
+.wave5 { animation-delay: 0.9s; }
+
+.music-title {
+    margin-left: 15px;
+    font-family: 'Times New Roman', serif;
+    font-style: italic;
+    color: #8b4513;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    white-space: nowrap;
+}
+
+.music-title.active {
+    opacity: 1;
+}
+
+@keyframes wave {
+    0%, 100% {
+        height: 10px;
+    }
+    50% {
+        height: 25px;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/*diseño flores*/
+
+#flowers-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.flower {
+    position: absolute;
+    bottom: -20px;
+    width: 20px;
+    height: 20px;
+    opacity: 0.9;
+    pointer-events: none;
+    z-index: 999;
+    animation-name: flowerFloat;
+    animation-timing-function: ease-in-out;
+}
+
+/* Flores mejoradas con diseños más realistas */
+.flower1 { 
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="12" fill="%23FFCC00"/><path fill="%23FF69B4" d="M50 15c0 0 5 15 0 23c-5-8 0-23 0-23zM27 27c0 0 15 5 23 0c-8-5-23 0-23 0zM15 50c0 0 15-5 23 0c-8 5-23 0-23 0zM27 73c0 0 15-5 23 0c-8 5-23 0-23 0zM50 85c0 0 5-15 0-23c-5 8 0 23 0 23zM73 73c0 0-15-5-23 0c8 5 23 0 23 0zM85 50c0 0-15 5-23 0c8-5 23 0 23 0zM73 27c0 0-15 5-23 0c8-5 23 0 23 0z"/></svg>') no-repeat center center; 
+    background-size: contain; 
+}
+
+.flower2 { 
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="10" fill="%23FFFF00"/><path fill="%23FF9999" d="M50 20c8 0 15 7 15 15S58 50 50 50s-15-7-15-15 7-15 15-15zm0 35c8 0 15 7 15 15s-7 15-15 15-15-7-15-15 7-15 15-15zm-20-17.5c0-8 7-15 15-15s15 7 15 15-7 15-15 15-15-7-15-15zm40 0c0-8 7-15 15-15s15 7 15 15-7 15-15 15-15-7-15-15z"/></svg>') no-repeat center center; 
+    background-size: contain; 
+}
+
+.flower3 { 
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="12" fill="%23FFDD00"/><path fill="%23FFB6C1" d="M30 30c0 0 10-10 20-10c-5 10-20 10-20 10zM30 70c0 0 10 10 20 10c-5-10-20-10-20-10zM70 30c0 0-10-10-20-10c5 10 20 10 20 10zM70 70c0 0-10 10-20 10c5-10 20-10 20-10zM20 50c0 0 10 0 10 10c-10-5-10-10-10-10zM80 50c0 0-10 0-10 10c10-5 10-10 10-10zM50 20c0 0 0 10-10 10c5-10 10-10 10-10zM50 80c0 0 0-10-10-10c5 10 10 10 10-10z"/></svg>') no-repeat center center; 
+    background-size: contain; 
+}
+
+.flower4 { 
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="10" fill="%23FFCC00"/><path fill="%23FF77AA" d="M35 35c0 0 5-20 15-20s15 20 15 20-5-10-15-10-15 10-15 10zM35 65c0 0 5 20 15 20s15-20 15-20-5 10-15 10-15-10-15-10zM65 35c0 0 20 5 20 15s-20 15-20 15 10-5 10-15-10-15-10-15zM35 35c0 0-20 5-20 15s20 15 20 15-10-5-10-15 10-15 10-15z"/></svg>') no-repeat center center; 
+    background-size: contain; 
+}
+
+@keyframes flowerFloat {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.9;
+    }
+    25% {
+        transform: translateX(25px) translateY(-100px) rotate(45deg);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translateX(-25px) translateY(-200px) rotate(90deg);
+        opacity: 0.6;
+    }
+    75% {
+        transform: translateX(25px) translateY(-300px) rotate(135deg);
+        opacity: 0.4;
+    }
+    100% {
+        transform: translateX(-25px) translateY(-400px) rotate(180deg);
+        opacity: 0;
+    }
+}
+
+/* Estilos mejorados para El Principito y la escena */
+.principito-container {
+    position: relative;
+    width: 220px; /* Aumentado ligeramente */
+    height: 220px; /* Aumentado ligeramente */
+    z-index: 10; /* Reducido para mantener jerarquía correcta */
+    margin: 50px auto; /* Centrado y con margen superior */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    overflow: visible;
+}
+
+/* Indicación visual de que es clicable */
+.principito-container::after {
+    content: "Haz clic";
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-family: 'Arial', sans-serif;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    z-index: 100; /* Asegura que esta indicación esté visible */
+}
+
+.principito-container:hover::after {
+    opacity: 1;
+}
+
+.principito-container:hover {
+    transform: scale(1.05);
+}
+
+.principito-scene {
+    overflow: visible;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(to bottom, #0c0c3e, #1f1f6d); /* Azul más profundo */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4), inset 0 0 30px rgba(0, 0, 50, 0.5);
+    overflow: hidden;
+    border: 3px solid rgba(255, 215, 0, 0.3); /* Borde dorado sutil */
+}
+
+.planet {
+    position: absolute;
+    bottom: 25px;
+    left: 40px;
+    width: 140px;
+    height: 40px;
+    background: linear-gradient(to bottom, #8b4513, #5e2c0d); /* Gradiente para el planeta */
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4), inset 0 -2px 10px rgba(0, 0, 0, 0.5);
+    z-index: 5;
+}
+
+/* Mejorado el aspecto de las estrellas */
+.star {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #fff, 0 0 10px #fff;
+    animation: twinkle 3s infinite alternate;
+    z-index: 4;
+}
+
+.star1 { top: 20px; left: 30px; width: 3px; height: 3px; animation-delay: 0s; }
+.star2 { top: 40px; left: 70px; width: 2px; height: 2px; animation-delay: 0.3s; }
+.star3 { top: 25px; left: 120px; width: 4px; height: 4px; animation-delay: 0.6s; }
+.star4 { top: 60px; left: 140px; width: 2px; height: 2px; animation-delay: 0.9s; }
+.star5 { top: 70px; left: 30px; width: 3px; height: 3px; animation-delay: 1.2s; }
+.star6 { top: 35px; left: 180px; width: 2px; height: 2px; animation-delay: 1.5s; }
+.star7 { top: 90px; left: 50px; width: 3px; height: 3px; animation-delay: 1.8s; }
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+.principito {
+    position: absolute;
+    bottom: 35px;
+    left: 85px; /* Centrado mejor */
+    z-index: 10;
+    transition: transform 0.5s ease;
+    overflow: visible;
+}
+
+.principito img {
+    overflow: visible;
+    height: 85px;
+    width: auto;
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.7)); /* Resplandor dorado mejorado */
+    transition: filter 0.3s ease;
+}
+
+.principito-container:hover .principito img {
+    overflow: visible;
+    filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.9));
+}
+
+.principito-container:active .principito {
+    transform: scale(0.95);
+    overflow: visible;
+}
+
+/* Burbuja de cita mejorada - Garantizando que aparezca encima */
+.quote-bubble {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.97), rgba(255, 250, 240, 0.97));
+    border-radius: 20px;
+    padding: 15px;
+    width: 180px; /* Tamaño fijo para mejor diseño */
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    font-size: 13px;
+    line-height: 1.5;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(-20px) scale(0.9);
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animación más elegante */
+    border: 1px solid rgba(255, 200, 100, 0.5);
+    text-align: center;
+    pointer-events: none;
+    z-index: 9999; /* Valor muy alto para asegurar que esté encima de todo */
+    overflow: visible;
+    position: fixed; /* Cambiado de absolute a fixed para asegurar que esté por encima */
+    margin-left: auto; /* Centrado horizontal */
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    width: 180px;
+}
+
+.quote-bubble.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    overflow: visible;
+}
+
+.quote-bubble p {
+    margin: 0;
+    color: #553300;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.4;
+    font-size: 8px;
+    overflow: visible;
+}
+
+.quote-bubble::before {
+    content: '❝';
+    display: block;
+    font-size: 12px;
+    color: #E91E63; /* Rosa para la rosa */
+    text-align: center;
+    margin-bottom: 2px;
+    line-height: 1;
+    overflow: visible;
+}
+
+.quote-bubble::after {
+    content: '❞';
+    display: block;
+    font-size: 12px;
+    color: #E91E63; /* Rosa para la rosa */
+    text-align: center;
+    margin-top: 4px;
+    line-height: 1;
+    overflow: visible;
+}
+
+/* Pequeña rosa decorativa */
+.rose {
+    position: absolute;
+    bottom: 45px;
+    right: 40px;
+    width: 25px;
+    height: 25px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23008000" d="M50 70c0 0 0 25 0 28s2 2 2 0 0-28 0-28z"/><path fill="%23E91E63" d="M50 40c-12 0-22 10-22 22s10 22 22 22 22-10 22-22-10-22-22-22zm0 38c-9 0-16-7-16-16s7-16 16-16 16 7 16 16-7 16-16 16z"/><path fill="%23D81B60" d="M50 46c-9 0-16 7-16 16s7 16 16 16 16-7 16-16-7-16-16-16zm8 16c0 4.4-3.6 8-8 8s-8-3.6-8-8 3.6-8 8-8 8 3.6 8 8z"/></svg>') no-repeat center center;
+    background-size: contain;
+    z-index: 5;
+    filter: drop-shadow(0 0 3px rgba(233, 30, 99, 0.6));
+    transform: rotate(-15deg);
+    opacity: 0.9;
+    transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.principito-container:hover .rose {
+    transform: rotate(-5deg) scale(1.1);
+    filter: drop-shadow(0 0 5px rgba(233, 30, 99, 0.8));
+}
+
+/* Adaptación para dispositivos móviles */
+@media (max-width: 768px) {
+    .principito-container {
+        width: 160px;
+        height: 160px;
+        margin: 30px auto;
+    }
+    
+    .planet {
+        width: 100px;
+        height: 30px;
+        bottom: 20px;
+        left: 30px;
+    }
+    
+    .principito img {
+        height: 60px;
+    }
+    
+    .principito {
+        bottom: 30px;
+        left: 65px;
+    }
+    
+    .quote-bubble {
+        font-size: 11px;
+        padding: 2px;
+        width: 100px;
+        top: 5px;
+        right: 5px;
+        transform: translateY(-10px) scale(0.8);
+        height: 50px;
+    }
+    
+    .rose {
+        width: 20px;
+        height: 20px;
+        bottom: 35px;
+        right: 30px;
     }
 }

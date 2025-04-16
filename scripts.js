@@ -3,7 +3,7 @@ function createHearts() {
     const heartContainer = document.getElementById('heart-container');
     
     // Crear 15 corazones
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < 9000; i++) {
         setTimeout(() => {
             const heart = document.createElement('div');
             heart.classList.add('heart');
@@ -210,3 +210,301 @@ function adjustLayoutForDevice() {
 
 // Inicializar ajustes de diseño
 adjustLayoutForDevice();
+//inicio autoplay
+
+document.addEventListener('DOMContentLoaded', function() {
+    const audio = document.getElementById('background-audio');
+    const playButton = document.getElementById('play-music');
+    const musicWaves = document.getElementById('music-waves');
+    const musicTitle = document.querySelector('.music-title');
+    let isPlaying = false;
+
+    // Función para actualizar la interfaz cuando se reproduce música
+    function updateUIPlaying() {
+        playButton.classList.add('playing');
+        musicWaves.classList.add('active');
+        musicTitle.classList.add('active');
+        isPlaying = true;
+    }
+
+    // Función para actualizar la interfaz cuando se pausa la música
+    function updateUIPaused() {
+        playButton.classList.remove('playing');
+        musicWaves.classList.remove('active');
+        musicTitle.classList.remove('active');
+        isPlaying = false;
+    }
+
+    // Intento de reproducción automática con diferentes estrategias
+    function attemptAutoplay() {
+        // 1. Intento directo
+        const playPromise = audio.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                console.log('Reproducción automática exitosa');
+                updateUIPlaying();
+            }).catch(error => {
+                console.log('Autoplay fue bloqueado:', error);
+                // 2. Plan B: Intentar con audio silenciado primero
+                audio.muted = true;
+                audio.play().then(() => {
+                    // Mostrar un mensaje visual indicando que deben hacer clic para escuchar
+                    playButton.style.animation = 'pulse 1.5s infinite';
+                    // Crear notificación
+                    showMusicNotification();
+                }).catch(e => {
+                    console.log('Incluso reproducción silenciosa fue bloqueada:', e);
+                });
+            });
+        }
+    }
+
+    // Mostrar notificación para activar sonido
+    function showMusicNotification() {
+        const notification = document.createElement('div');
+        notification.className = 'music-notification';
+        notification.innerHTML = 'Haz clic para escuchar la música ♥';
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 245, 230, 0.95);
+            border: 1px solid #d4a76a;
+            border-radius: 20px;
+            padding: 10px 20px;
+            box-shadow: 0 2px 10px rgba(139, 69, 19, 0.3);
+            font-family: 'Times New Roman', serif;
+            color: #8b4513;
+            font-size: 16px;
+            z-index: 1000;
+            animation: fadeInOut 5s forwards;
+        `;
+        document.body.appendChild(notification);
+        
+        // Definir la animación
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInOut {
+                0%, 100% { opacity: 0; }
+                10%, 90% { opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Eliminar la notificación después de 5 segundos
+        setTimeout(() => {
+            notification.remove();
+        }, 5000);
+    }
+
+    // Intento de autoplay al cargar la página
+    attemptAutoplay();
+
+    // Manejar clic en el botón de música
+    playButton.addEventListener('click', function() {
+        if (isPlaying) {
+            audio.pause();
+            updateUIPaused();
+        } else {
+            audio.muted = false; // Asegurarse de que no esté silenciado
+            audio.play().then(() => {
+                updateUIPlaying();
+            }).catch(error => {
+                console.error("Error al reproducir audio:", error);
+            });
+        }
+    });
+
+    // Evento global para activar sonido con cualquier clic en la página
+    document.addEventListener('click', function globalClickHandler() {
+        if (audio.muted) {
+            audio.muted = false;
+            if (!isPlaying) {
+                audio.play().then(() => {
+                    updateUIPlaying();
+                }).catch(e => console.error(e));
+            }
+            document.removeEventListener('click', globalClickHandler);
+        }
+    });
+
+    // Detectar cuando el usuario cambia de pestaña
+    document.addEventListener('visibilitychange', function() {
+        if (document.visibilityState === 'visible') {
+            // Si la música no está sonando cuando regresa, intentar reanudarla
+            if (!audio.paused) {
+                updateUIPlaying();
+            }
+        }
+    });
+
+    // Si la música se detiene por alguna razón, actualizar UI
+    audio.addEventListener('pause', updateUIPaused);
+    audio.addEventListener('play', updateUIPlaying);
+});
+
+// Función para crear y animar flores
+document.addEventListener('DOMContentLoaded', function() {
+    const flowersContainer = document.getElementById('flowers-container');
+    
+    function createFlowers() {
+        const container = document.getElementById('flowers-container');
+        const flowerTypes = ['flower1', 'flower3', 'flower4'];
+        
+        setInterval(() => {
+            const flower = document.createElement('div');
+            const type = flowerTypes[Math.floor(Math.random() * flowerTypes.length)];
+            flower.className = `flower ${type}`;
+            
+            // Posición aleatoria en el eje X
+            const posX = Math.random() * window.innerWidth;
+            flower.style.left = `${posX}px`;
+            
+            // Duración aleatoria
+            const duration = 5 + Math.random() * 5;
+            flower.style.animationDuration = `${duration}s`;
+            
+            container.appendChild(flower);
+            
+            // Eliminar la flor después de la animación
+            setTimeout(() => {
+                flower.remove();
+            }, duration * 1000);
+        }, 300);
+    }
+    
+    // Iniciar la creación de flores cuando se cargue la página
+    window.addEventListener('load', createFlowers);
+});
+
+
+/* JavaScript para manejar el clic en el Principito */
+/* Script para manejar la interacción */
+document.addEventListener('DOMContentLoaded', function() {
+    const principitoContainer = document.querySelector('.principito-container');
+    const quoteBubble = document.querySelector('.quote-bubble');
+    
+    // Agregar la rosa al diseño
+    const rose = document.createElement('div');
+    rose.className = 'rose';
+    principitoContainer.querySelector('.principito-scene').appendChild(rose);
+    
+    // Actualizar el texto de la cita
+    quoteBubble.querySelector('p').textContent = "Mi rosa no es cualquier rosa, es mi rosa";
+    
+    // Mostrar/ocultar la burbuja de cita al hacer clic
+    principitoContainer.addEventListener('click', function() {
+        quoteBubble.classList.toggle('show');
+    });
+});
+
+
+//hacer fotos grandes
+document.addEventListener('DOMContentLoaded', function() {
+  // Get the modal
+  const modal = document.getElementById('imageModal');
+  
+  // Get the modal image and title elements
+  const modalImg = document.getElementById('modalImage');
+  const modalTitle = document.getElementById('modalImageTitle');
+  
+  // Get all gallery items
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  
+  // Get the close button
+  const closeButton = document.querySelector('.close-button');
+  
+  // Add click event to all gallery items
+  galleryItems.forEach(item => {
+    item.addEventListener('click', function() {
+      // Get image source and title from data attributes
+      const imgSrc = this.getAttribute('data-image');
+      const imgTitle = this.getAttribute('data-title');
+      
+      // Set the modal image source and title
+      modalImg.src = imgSrc;
+      modalTitle.textContent = imgTitle;
+      
+      // Display the modal
+      modal.classList.add('active');
+      
+      // Prevent scrolling of background content
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  
+  // Close the modal when clicking the close button
+  closeButton.addEventListener('click', function() {
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  });
+  
+  // Close the modal when clicking outside the image
+  window.addEventListener('click', function(event) {
+    if (event.target === modal) {
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the modal
+    const modal = document.getElementById('imageModal');
+    
+    // Get the modal image and title elements
+    const modalImg = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalImageTitle');
+    
+    // Get all gallery items
+    const galleryItems = document.querySelectorAll('.vintage-gallery .gallery-item');
+    
+    // Get the close button
+    const closeButton = document.querySelector('.close-button');
+    
+    // Add click event to all gallery items
+    galleryItems.forEach(item => {
+      item.addEventListener('click', function() {
+        // Find the image within this gallery item
+        const img = this.querySelector('img');
+        
+        // Get image source and alt text (for title)
+        const imgSrc = img.src;
+        const imgAlt = img.alt || 'Vintage Memory';
+        
+        // Set the modal image source and title
+        modalImg.src = imgSrc;
+        modalTitle.textContent = imgAlt;
+        
+        // Display the modal
+        modal.classList.add('active');
+        
+        // Prevent scrolling of background content
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    
+    // Close the modal when clicking the close button
+    closeButton.addEventListener('click', function() {
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+    
+    // Close the modal when clicking outside the image
+    window.addEventListener('click', function(event) {
+      if (event.target === modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    });
+    
+    // Add keyboard support (ESC key to close)
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape' && modal.classList.contains('active')) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    });
+  });
